@@ -16,7 +16,7 @@
 ## Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/Tonoy3951573/MicroInterpreter-A-Simple-Custom-Programming-Language-Interpreter.git
+git clone https://github.com/Tonoy3951573/MicroInterpreter.git
 ```
 2. Compile the interpreter:
 ```bash
