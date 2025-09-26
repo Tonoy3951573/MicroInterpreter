@@ -17,6 +17,7 @@
 1. Clone the repository:
 ```bash
 git clone https://github.com/Tonoy3951573/MicroInterpreter.git
+cd MicroInterpreter
 ```
 2. Compile the interpreter:
 ```bash
