@@ -2,37 +2,35 @@
 #include<stdlib.h>
 #include<string.h>
 #include<ctype.h>
+#include<math.h>
 
 #define MAXVARS 256
 typedef struct {
     char var_name[MAXVARS];
-    int value;
+    char data_type;
+    union {
+       int ivar;
+       float fvar; 
+    } value;
 } vars;
 
 vars var[MAXVARS];
 int var_count = 0;
 
-int get_var(const char name[]){
+float get_var(const char name[]){
     for(int i = 0; i < var_count; i++){
         if(strcmp(var[i].var_name,name)== 0){
-            return var[i].value;
+          return (var[i].data_type == 'i')?var[i].value.ivar : var[i].value.fvar;
         }
     }
-    return 0;
+    return 0.0f;
 }
 
-void set_var(const char name[], const int value){
-    for(int i = 0; i < var_count; i++){
-        if(strcmp(var[i].var_name,name)== 0){
-            var[i].value = value;
-        }
-    }
-}
 
-int eval(char *expr) {
+float eval(char *expr) {
     char *p = expr;
-    int result = 0;
-    int num = 0;
+    float result = 0;
+    float num = 0;
     char var[64], op = '+';
 
     while (*p) {
@@ -65,41 +63,80 @@ int eval(char *expr) {
 }
 
 void run_line(char line[]){
-    
-    if(strstr(line,"var") != NULL){
-        char arg1[256],arg2[256];
-        if(strstr(line,"=") != NULL){
-
-            sscanf(line,"var %s = %[^\n]",arg1,arg2);
-            strcpy(var[var_count].var_name, arg1);
-            var[var_count].value = eval(arg2);
-        }
-        else{
-
-            sscanf(line,"var %s ",arg1);
-            strcpy(var[var_count].var_name, arg1);
-            var[var_count].value = 0;
-        }
-        var_count++;
-        
-    }
-    else if(strstr(line,"print") != NULL){
+   
+    if(strstr(line,"print") != NULL){
         char arg1[256];
         if(strstr(line,"\"") != NULL){
             sscanf(line,"print %[^\n]",arg1);
             printf("%s\n",arg1);
         }
         else{
-            sscanf(line,"print %[^\n]",arg1);
-            printf("%d\n",eval(arg1));
+        sscanf(line,"print %[^\n]",arg1);
+        float val = eval(arg1);
+        if(floor(val) == val) 
+            printf("%d\n",(int)val);
+        else
+            printf("%f\n",val);
         }
     }
+    else if(strstr(line,"int") != NULL){
+        char arg1[256],arg2[256];
+        var[var_count].data_type = 'i';
+        if(strstr(line,"=") != NULL){
+
+            sscanf(line,"int %s = %[^\n]",arg1,arg2);
+            strcpy(var[var_count].var_name, arg1);
+            var[var_count].value.ivar = eval(arg2);
+        }
+        else{
+
+            sscanf(line,"int %s ",arg1);
+            strcpy(var[var_count].var_name, arg1);
+            var[var_count].value.ivar = 0;
+        }
+        var_count++;
+        
+    }
+    else if(strstr(line,"float") != NULL){
+        char arg1[256],arg2[256];
+        var[var_count].data_type = 'f';
+        if(strstr(line,"=") != NULL){
+
+            sscanf(line,"float %s = %[^\n]",arg1,arg2);
+            strcpy(var[var_count].var_name, arg1);
+            var[var_count].value.fvar = eval(arg2);
+        }
+        else{
+
+            sscanf(line,"float %s ",arg1);
+            strcpy(var[var_count].var_name, arg1);
+            var[var_count].value.fvar = 0;
+        }
+        var_count++;
+        
+    }
     else if(strstr(line,"input") != NULL){
-        int value = 0;
         char arg1[256];
-        scanf("%d",&value);
         sscanf(line, "input %[^\n]",arg1);
-        set_var(arg1,value);
+        char data_type = 'n';
+        int i;
+        for( i = 0; i < var_count; i++){
+            if(strcmp(var[i].var_name,arg1) == 0){
+               break; 
+            }
+        }
+        if(var[i].data_type == 'i'){
+            scanf("%d",&var[i].value.ivar);
+        }
+        else if(var[i].data_type == 'f'){
+            scanf("%f",&var[i].value.fvar);
+        }
+    }
+    else{
+        //should be implimented sytax error for unknown syntax
+        printf("Syntax Error ! \n");
+        exit(-1);
+
     }
 }
 

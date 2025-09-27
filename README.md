@@ -5,7 +5,8 @@
 ---
 
 ## Features
-- Variable declaration: `var x = 5`
+- Support floating-point numbers
+- Variable declaration: `int x = 5` or `float y = 5.5`
 - Arithmetic operations: `+`, `-`, `*`, `/`
 - Input from user: `input x`
 - Print values or expressions: `print x + 5`
@@ -31,32 +32,31 @@ gcc micro_interpreter.c -o micro
 # Usage Example 
  Example `example.mic`:
  ```mic
-var x = 5
-var y = 10
+int x = 5
+int y = 10
 print x
 print y
-var z
+float z
 input z
 print z + x * y
 ```
-Output (if input is `2` for z):
+Output (if input is `2.00` for z):
 ```
 5
 10
-25
+25.00
 ```
 ---
 # How it works
 1. Reads the source file line by line
 2. Parses each line:
-  -Variable declaration and assignment
+  - Variable declaration and assignment
   - Arithmetic expression evaluation
   - Printing strings or evaluated expressions
   - Updating variable values from input
 3. Evaluates expression supporting `+`,`-`,`*`,`/`.
 ---
 # Future Improvements
-  - Support floating-point numbers
   - Conditional statement(`if`,`else`)
   - Loops (`while`,`for`)
   - Functions

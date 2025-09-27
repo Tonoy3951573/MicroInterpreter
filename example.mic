@@ -1,7 +1,7 @@
 print "test.mic is running .. "
-var x = 5
-var y = 6
-var z
+int x = 5
+int y = 6
+float z
 input z
 print z
 print x + 50
