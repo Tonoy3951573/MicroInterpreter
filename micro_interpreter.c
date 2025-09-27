@@ -133,7 +133,6 @@ void run_line(char line[]){
         }
     }
     else{
-        //should be implimented sytax error for unknown syntax
         printf("Syntax Error ! \n");
         exit(-1);
 
