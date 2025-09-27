@@ -5,4 +5,5 @@ float z
 input z
 print z
 print x + 50
+print z + 8
 print "welcome to micro language"
