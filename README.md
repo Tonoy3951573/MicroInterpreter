@@ -6,7 +6,7 @@
 
 ## Features
 - Support floating-point numbers
-- Variable declaration: `int x = 5` or `float y = 5.5`
+- Variable declaration: `int x = 5` , `float y = 5.5`, and `string str = "hello"`
 - Arithmetic operations: `+`, `-`, `*`, `/`
 - Input from user: `input x`
 - Print values or expressions: `print x + 5`
@@ -22,7 +22,7 @@ cd MicroInterpreter
 ```
 2. Compile the interpreter:
 ```bash
-gcc micro_interpreter.c -o micro
+gcc -lm micro_interpreter.c -o micro
 ```
 3. Run a MicroLang script
 ```bash
