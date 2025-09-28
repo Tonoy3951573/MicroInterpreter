@@ -7,9 +7,9 @@
 ## Features
 - Support floating-point numbers
 - Variable declaration: `int x = 5` , `float y = 5.5`, and `string str = "hello"`
-- Arithmetic operations: `+`, `-`, `*`, `/`
+- Arithmetic operations: `+`, `-`, `*`, `/`,`%`
 - Input from user: `input x`
-- Print values or expressions: `print x + 5`
+- Print values , expressions or string: `print x + 5`,`print "hello world"`
 - Simple and easy-to-extend design
 
 ---
@@ -54,7 +54,7 @@ Output (if input is `2.00` for z):
   - Arithmetic expression evaluation
   - Printing strings or evaluated expressions
   - Updating variable values from input
-3. Evaluates expression supporting `+`,`-`,`*`,`/`.
+3. Evaluates expression supporting `+`,`-`,`*`,`/`,`%`.
 ---
 # Future Improvements
   - Conditional statement(`if`,`else`)
