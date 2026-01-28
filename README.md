@@ -22,7 +22,7 @@ cd MicroInterpreter
 ```
 2. Compile the interpreter:
 ```bash
-gcc -lm micro_interpreter.c -o micro
+gcc  micro_interpreter.c -lm -o micro
 ```
 3. Run a MicroLang script
 ```bash
